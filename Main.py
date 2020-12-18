@@ -50,17 +50,13 @@ def optimized_strategy():
         i = 0
         #TODO Something in here is broke 
         new_number = cards[prisoner.number].number
-        #Look into why this works....
+        #TODO Look into why this works....
         while not (prisoner.number == new_number or i > AMOUNT_OF_TRIES):
-            #print(f"number not found. prisoner = {prisoner.number} card = {new_number} amount of tries = {i}")
             temp_new_number = cards[new_number].number
             new_number = temp_new_number
             i += 1
-            #break
         if prisoner.number == new_number:
-            #print(f"number found. prisoner = {prisoner.number} amount of tries = {i}")
             j += 1
-
     return j
 
 success = 0
