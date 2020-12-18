@@ -4,7 +4,7 @@ import random
 
 #Amount of cards/prisoners.
 AMOUNT_TO_FIND = 10
-AMOUNT_OF_TRIES =  5
+AMOUNT_OF_TRIES = 5
 
 #Creates list of prisoner object
 prisoners = [Prisoner(i, False) for i in range(AMOUNT_TO_FIND)]
@@ -18,7 +18,9 @@ def no_strategy():
         i = 0
         #ensure each iteration starts with False
         prisoner.found_card = False
-        #TODO Figure out a different way besides while
+        #TODO Figure out a different way besides while.
+        #TODO Check breaks, figure out a better logical system.
+        #TODO Remove found_card system.
         while prisoner.found_card == False:
             for card in cards:
                 if i == AMOUNT_OF_TRIES:
@@ -48,16 +50,15 @@ def optimized_strategy():
         if prisoner.number == cards[prisoner.number].number:
             print(f"number found. prisoner = {prisoner.number} amount of tries = {i}")
             break
-
+        #TODO Something in here is broke 
         else:
             new_number = cards[prisoner.number].number
-            while i < AMOUNT_OF_TRIES:
-                while prisoner.number != new_number or i < AMOUNT_OF_TRIES:
-                    print(f"number not found. prisoner = {prisoner.number} card = {new_number} amount of tries = {i}")
-                    temp_new_number = cards[new_number].number
-                    new_number = temp_new_number
-                    i += 1
-                break
+            while prisoner.number != new_number or i < AMOUNT_OF_TRIES:
+                print(f"number not found. prisoner = {prisoner.number} card = {new_number} amount of tries = {i}")
+                temp_new_number = cards[new_number].number
+                new_number = temp_new_number
+                i += 1
+            break
     return cards
                
 for x in range(1000):
