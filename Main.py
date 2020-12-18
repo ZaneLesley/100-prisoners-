@@ -3,8 +3,8 @@ from Card import Card
 import random
 
 #Amount of cards/prisoners.
-AMOUNT_TO_FIND = 100
-AMOUNT_OF_TRIES =  50
+AMOUNT_TO_FIND = 10
+AMOUNT_OF_TRIES =  5
 
 #Creates list of prisoner object
 prisoners = [Prisoner(i, False) for i in range(AMOUNT_TO_FIND)]
@@ -14,11 +14,11 @@ def no_strategy():
     cards = [Card(i) for i in range(AMOUNT_TO_FIND)]
     random.shuffle(cards)
     for prisoner in prisoners:
-        #print(f"prisoner number: {prisoner.number}")
         #amount of tries for the prisoner
         i = 0
         #ensure each iteration starts with False
         prisoner.found_card = False
+        #TODO Figure out a different way besides while
         while prisoner.found_card == False:
             for card in cards:
                 if i == AMOUNT_OF_TRIES:
@@ -32,14 +32,36 @@ def no_strategy():
                     i += 1
                 
                 if prisoner.found_card == True:
-                continue
+                    continue
             break
         if len(prisoners) == 0:
             return cards
     return cards
+
+def optimized_strategy():
+    #Create list of cards
+    cards = [Card(i) for i in range(AMOUNT_TO_FIND)]
+    random.shuffle(cards)
+   
+    for prisoner in prisoners:
+        i = 0
+        if prisoner.number == cards[prisoner.number].number:
+            print(f"number found. prisoner = {prisoner.number} amount of tries = {i}")
+            break
+
+        else:
+            new_number = cards[prisoner.number].number
+            while i < AMOUNT_OF_TRIES:
+                while prisoner.number != new_number or i < AMOUNT_OF_TRIES:
+                    print(f"number not found. prisoner = {prisoner.number} card = {new_number} amount of tries = {i}")
+                    temp_new_number = cards[new_number].number
+                    new_number = temp_new_number
+                    i += 1
+                break
+    return cards
                
 for x in range(1000):
-    result = no_strategy()
+    result = optimized_strategy()
     
     if len(result) == 0:
         print("success")
