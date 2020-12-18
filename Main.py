@@ -67,10 +67,4 @@ for x in range(1000):
     if len(result) == 0:
         print("success")
     else:
-        print("fail")
-        
-
-
-
-
-        
+        print("fail")     
