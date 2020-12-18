@@ -10,4 +10,4 @@ prisoners = [Prisoner(i) for i in range(AMOUNT_TO_FIND)]
 cards = [Card(i) for i in range(AMOUNT_TO_FIND)]
 copy_of_cards = cards.copy()
 
-print(copy_of_cards)
+for prisoner in prisoners
